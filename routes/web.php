@@ -35,7 +35,9 @@ Route::group(['middleware' => ['auth']], function()
     Route::post('/contact', 'ContactController@form')->name('contact.form');
 
     Route::post('/monitoring', 'ReadoutController@monitoring')->name('monitoring');
+
+    Route::get('/alerts', 'AlertController@clear')->name('alerts.clear');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 

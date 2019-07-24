@@ -7,15 +7,16 @@
         <h6 class="m-0 font-weight-bold text-primary">Transmissores</h6>
     </div>
     <div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col" style="width:10%"></th>
-                <th scope="col">Identificador</th>
-                <th scope="col">Registro</th>
-            </tr>
-        </thead>
-        <tbody>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" style="width:10%"></th>
+                    <th scope="col">Identificador</th>
+                    <th scope="col">Registro</th>
+                    <th scope="col" class="text-center">Status</th>
+                </tr>
+            </thead>
+            <tbody>
             @forelse($boards as $board)
                 <tr>
                     <th scope="row" class="text-center align-middle">
@@ -35,14 +36,21 @@
                     </th>
                     <td class="align-middle">{{ $board->name }}</td>
                     <td class="align-middle">{{ $board->number_serial }}</td>
+                    <td class="align-middle text-center">
+                    @if($board->status)
+                        <i class="fas fa-check-circle text-success"></i>
+                    @else
+                        <i class="fas fa-times-circle text-danger"></i>
+                     @endif
+                    </td>
                 </tr>
             @empty
                 <tr>
                     <td colspan="4">Você não possui nenhum transmissor registrado.</td>
                 </tr>
             @endforelse
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </div>
 </div>
 <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="locationModalLabel" aria-hidden="true">
@@ -63,4 +71,12 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+</script>
 @endsection

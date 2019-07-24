@@ -3,11 +3,23 @@
         <h6 class="m-0 font-weight-bold text-primary">Dados</h6>
     </div>
     <div class="card-body">
-      {<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>"read_at"</b> : "2019-07-16 22:20:00",<br> 
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>"temperature"</b> : "24 ºC", <br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>"humidity"</b> : "73%",<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<b>"battery"</b> : "49%"<br>
-      }
+    @forelse ($readouts as $readout)
+        <span class="text-muted">
+        @if (date('d/m/Y') == date('d/m/Y', strtotime($readout->created_at)))
+            Hoje, às {{ date('H:i', strtotime($readout->created_at)) }}
+        @elseif (date('d/m/Y', strtotime('yesterday')) == date('d/m/Y', strtotime($readout->created_at)))
+            Ontem, às {{ date('H:i', strtotime($readout->created_at)) }}
+        @else
+            {{ date('d/m/Y à\s H:i', strtotime($readout->created_at)) }}
+        @endif
+        </span>
+        <br>&nbsp;&nbsp;&nbsp;{<br>
+        @foreach (json_decode($readout->protocol) as $key => $value)
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>"{{ $key }}"</b> : "{{ $value }}",<br>
+        @endforeach
+        &nbsp;&nbsp;&nbsp;}<br><br>
+    @empty
+      <span class="text-muted">Nenhum registro encontrado.</span>
+    @endforelse
     </div>
 </div>

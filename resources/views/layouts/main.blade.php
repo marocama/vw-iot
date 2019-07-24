@@ -9,7 +9,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-		<title>{{ config('app.name', 'Laravel') }}</title>
+	<title>{{ config('app.name', 'Laravel') }}</title>
 		
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -36,26 +36,26 @@
             <hr class="sidebar-divider">
             <div class="sidebar-heading">Ferramentas</div>
             <li class="nav-item">
-								<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-										<i class="fas fa-fw fa-microchip"></i>
-										<span>Transmissores</span>
-								</a>
-								<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-										<div class="bg-white py-2 collapse-inner rounded">
-												<h6 class="collapse-header">Transmissores:</h6>
-												<a class="collapse-item" href="{{ route('transmitters') }}">Consultar</a>
-												<a class="collapse-item" href="{{ route('transmitters.form') }}">Registrar</a>
-										</div>
-								</div>
-						</li>
-						@if (Auth::user()->user_type == "Master") 
-							<li class="nav-item">
-									<a class="nav-link" href="{{ route('operators') }}">
-											<i class="fas fa-fw fa-user-friends"></i>
-											<span>Operadores</span>
-									</a>
-							</li>
-						@endif
+				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+					<i class="fas fa-fw fa-microchip"></i>
+					<span>Transmissores</span>
+				</a>
+				<div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+					<div class="bg-white py-2 collapse-inner rounded">
+						<h6 class="collapse-header">Transmissores:</h6>
+						<a class="collapse-item" href="{{ route('transmitters') }}">Consultar</a>
+						<a class="collapse-item" href="{{ route('transmitters.form') }}">Registrar</a>
+					</div>
+				</div>
+			</li>
+			@if (Auth::user()->user_type == "Master") 
+			<li class="nav-item">
+				<a class="nav-link" href="{{ route('operators') }}">
+					<i class="fas fa-fw fa-user-friends"></i>
+					<span>Operadores</span>
+				</a>
+			</li>
+			@endif
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('statistics') }}">
                     <i class="fas fa-fw fa-chart-bar"></i>
@@ -63,57 +63,55 @@
                 </a>
             </li>
             <hr class="sidebar-divider">
-						<div class="sidebar-heading">Outros</div>
-						<li class="nav-item">
+			<div class="sidebar-heading">Outros</div>
+			<li class="nav-item">
                 <a class="nav-link" href="{{ route('contact') }}">
-                    <i class="fas fa-fw fa-comment"></i>
-                    <span>Contato</span>
+                	<i class="fas fa-fw fa-comment"></i>
+                	<span>Contato</span>
                 </a>
             </li>
         </ul>
         <div id="content-wrapper" class="d-flex flex-column">
-				<div id="content">
+			<div id="content">
 				<nav class="navbar navbar-expand navbar-light bg-light topbar mb-4 static-top shadow">
-					<button id="sidebarToggle" class="btn btn-link d-md-none rounded-circle mr-3">
-							<i class="fa fa-bars"></i>
+					<button id="sidebarToggle" class="btn btn-link rounded-circle mr-3">
+						<i class="fa fa-bars"></i>
 					</button>
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item dropdown no-arrow mx-1">
 							<a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fas fa-bell fa-fw"></i>
 								@if (Auth::user()->alerts()->where('view', false)->count() != 0)
-									<span class="badge badge-danger badge-counter">
-										{{ Auth::user()->alerts()->where('view', false)->count() }}
-									</span>
+								<span class="badge badge-danger badge-counter">
+									{{ Auth::user()->alerts()->where('view', false)->count() }}
+								</span>
 								@endif
 							</a>
 							<div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
 								<h6 class="dropdown-header">Notificações</h6>
 								@forelse(Auth::user()->alerts()->latest()->limit(5)->get() as $alert)
-									<a class="dropdown-item d-flex align-items-center">
-											<div class="mr-3">
-												<div class="icon-circle bg-{{ $alert->color }}">
-													<i class="fas fa-{{ $alert->symbol }} text-white"></i>
-												</div>
+									<a class="dropdown-item d-flex align-items-center" href="{{ route('alerts.clear') }}">
+										<div class="mr-3">
+											<div class="icon-circle bg-{{ $alert->color }}">
+												<i class="fas fa-{{ $alert->symbol }} text-white"></i>
 											</div>
-											<div>
-												<div class="small text-gray-500">
-													@if (date('d/m/Y') == date('d/m/Y', strtotime($alert->period)))
-														Hoje, às {{ date('H:i', strtotime($alert->period)) }}
-													@elseif (date('d/m/Y', strtotime('yesterday')) == date('d/m/Y', strtotime($alert->period)))
-														Ontem, às {{ date('H:i', strtotime($alert->period)) }}
-													@else
-														{{ date('d/m/Y à\s H:i', strtotime($alert->period)) }}
-													@endif 
-												</div>
-												<span @if (!$alert->view) class="font-weight-bold" @endif>{{ $alert->name }}</span>
+										</div>
+										<div>
+											<div class="small text-gray-500">
+												@if (date('d/m/Y') == date('d/m/Y', strtotime($alert->period)))
+													Hoje, às {{ date('H:i', strtotime($alert->period)) }}
+												@elseif (date('d/m/Y', strtotime('yesterday')) == date('d/m/Y', strtotime($alert->period)))
+													Ontem, às {{ date('H:i', strtotime($alert->period)) }}
+												@else
+													{{ date('d/m/Y à\s H:i', strtotime($alert->period)) }}
+												@endif 
 											</div>
+											<span @if (!$alert->view) class="font-weight-bold" @endif>{{ $alert->name }}</span>
+										</div>
 									</a>
 								@empty
 									<a class="dropdown-item d-flex align-items-center" href="#">
-										<div class="small text-gray-600">
-												Não há nada para exibir.
-										</div>
+										<div class="small text-gray-600">Não há nada para exibir.</div>
 									</a>
 								@endforelse
 								<a class="dropdown-item text-center small text-gray-500"></a>
@@ -144,7 +142,7 @@
             <footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; VW Soluções 2019</span>
+						<span>&copy; 2019 VW <sup>IOT</sup>. All rights reserved.</span>
 					</div>
 				</div>
 			</footer>
@@ -175,10 +173,9 @@
 			</div>
 		</div>
 	</div>
-	
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('js/jquery.easing.min.js') }}"></script>
+ 	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+  	<script src="{{ asset('js/jquery.easing.min.js') }}"></script>
 	<script src="{{ asset('js/main.min.js') }}"></script>
 	@yield('js')
 </body>  

@@ -6,10 +6,9 @@
         <h6 class="m-0 font-weight-bold text-primary">Relatórios</h6>
     </div>
     <div class="card-body">
-      <p class="text-center">
-        <img src="{{ asset('img/unavailable.png') }}" class="img-fluid" alt="Responsive image">
-      </p>
-      
+    	<p class="text-center">
+        	<img src="{{ asset('img/unavailable.png') }}" class="img-fluid" alt="Responsive image">
+      	</p> 
     </div>
 </div>
 @endsection

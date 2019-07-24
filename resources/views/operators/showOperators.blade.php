@@ -7,17 +7,16 @@
         <h6 class="m-0 font-weight-bold text-primary">Operadores</h6>
     </div>
     <div class="table-responsive">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col" style="width:10%"></th>
-                <th scope="col">Nome</th>
-                <th scope="col">Email</th>
-                <th scope="col">Contato</th>
-
-            </tr>
-        </thead>
-        <tbody>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" style="width:10%"></th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Contato</th>
+                </tr>
+            </thead>
+            <tbody>
             @forelse($operators as $operator)
                 <tr>
                     <th scope="row" class="text-center align-middle">
@@ -32,8 +31,8 @@
                     <td colspan="4">Você não possui operadores registrados.</td>
                 </tr>
             @endforelse
-        </tbody>
-    </table>
+            </tbody>
+        </table>
     </div>
 </div>
 <div class="card shadow mb-4 border-left-primary">
@@ -46,7 +45,7 @@
         </p>
         <div class="alert bg-secondary text-white shadow mb-3 fade show" role="alert">
             <strong><i class="icon fa fa-key mr-2"></i></strong> {{ Auth::user()->user_token }}
-          </div>
+        </div>
     </div>
 </div>
 <div class="modal fade" id="delModal" tabindex="-1" role="dialog" aria-labelledby="delModalLabel" aria-hidden="true">

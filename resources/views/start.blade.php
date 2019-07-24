@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Plataforma de IOT para automação industrial desenvolvida e mantida pela empresa VW Soluções">
+    <meta name="author" content="Marcus Roberto">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 

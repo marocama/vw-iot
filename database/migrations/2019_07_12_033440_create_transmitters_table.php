@@ -18,6 +18,7 @@ class CreateTransmittersTable extends Migration
             $table->string('name')->nullable(); 
             $table->string('number_serial');
             $table->string('location')->nullable();
+            $table->boolean('status')->default(true);
             $table->timestamps();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');

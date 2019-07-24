@@ -20,7 +20,7 @@
             @enderror
         </div>
         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Enviar</button>
-        <hr class="my-2">
+        <br>
         <a class="btn btn-lg btn-secondary btn-block text-uppercase" href="{{ route('login') }}">Login</a>
     </form>
 </div>
