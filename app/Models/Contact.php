@@ -3,19 +3,26 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Contact extends Model
 {
     protected $fillable = [
-        'message', 'user_id'
+        'message', 'answered', 'user_id'
     ];
+
+    /*******************************/
+    /** Registro de nova mensagem **/
+    /*******************************/
 
     public function register($message) : Array
     {
-        $contact = Contact::create([
-            'message' => $message,
-            'user_id' => auth()->user()->id,
-        ]);
+        $contact = new Contact();
+
+        $contact->message   = $message;
+        $contact->user_id   = auth()->user()->id;
+
+        $contact->save();
 
         if ($contact)
             return [

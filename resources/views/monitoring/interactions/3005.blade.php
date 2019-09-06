@@ -13,13 +13,14 @@
             {{ date('d/m/Y à\s H:i', strtotime($readout->created_at)) }}
         @endif
         </span>
-        <br>&nbsp;&nbsp;&nbsp;{<br>
-        @foreach (json_decode($readout->protocol) as $key => $value)
+        <br>
+        &nbsp;&nbsp;&nbsp;{<br>
+        @foreach ($readout->protocol as $key => $value)
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>"{{ $key }}"</b> : "{{ $value }}",<br>
         @endforeach
-        &nbsp;&nbsp;&nbsp;}<br><br>
+        &nbsp;&nbsp;&nbsp;}<br><hr>
     @empty
-      <span class="text-muted">Nenhum registro encontrado.</span>
+        <span class="text-muted">Nenhum registro encontrado.</span>
     @endforelse
     </div>
 </div>

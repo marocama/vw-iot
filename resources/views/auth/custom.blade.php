@@ -3,7 +3,7 @@
 @section('content')
 <div class="card-body">
     <div class="text-center">
-        <img src="{{ asset('img/logo.jpg') }}" class="img-fluid mb-4" style="width:50%">
+		<img src="{{ asset('storage/logos/'.$logo) }}" class="img-fluid" style="width:50%">
     </div>
     <hr>
     <form class="form-signin mt-4" method="POST" action="{{ route('login') }}">
@@ -38,8 +38,6 @@
             </div>
         </div>
         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Entrar</button>
-        <br>
-        <a class="btn btn-lg btn-secondary btn-block text-uppercase" href="{{ route('register') }}">Registrar</a>
     </form>
 </div>
 @endsection

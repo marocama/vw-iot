@@ -22,8 +22,7 @@
                     <th scope="row" class="text-center align-middle">
                         <form role="form" method="POST" action="{{ route('monitoring') }}">
                             {!! csrf_field() !!}  
-                            <input type="hidden" name="interaction" id="interaction" value="{{ $board->interaction_id }}">
-                            <input type="hidden" name="number_serial" id="number_serial" value="{{ $board->number_serial }}">
+                            <input type="hidden" name="transmitter" id="transmitter" value="{{ $board->number_serial }}">
                             <button type="submit" class="btn btn-primary btn-sm text-white my-1 mx-1"><i class="fas fa-eye"></i></button>
                         </form>
                         <a class="btn btn-secondary btn-sm text-white" href="

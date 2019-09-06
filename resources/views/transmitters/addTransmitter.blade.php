@@ -46,8 +46,8 @@
                 @enderror
             </div>
             <div class="form-group">
-                <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" placeholder="Localização (Endereço)">
-                <small id="locationHelp" class="form-text text-muted">- Opcional</small>
+                <input id="location" type="text" class="form-control @error('location') is-invalid @enderror" name="location" placeholder="Localização (Logradouro, Número - Cidade / Estado)">
+                <small id="locationHelp" class="form-text text-muted">* Opcional</small>
                 @error('location')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>

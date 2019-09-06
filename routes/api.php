@@ -13,7 +13,4 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('throttle:20,1')->group(function () {
-
-    Route::post('/write', 'ReadoutController@write')->name('write');
-});
+Route::post('/write', 'ReadoutController@write')->name('write');

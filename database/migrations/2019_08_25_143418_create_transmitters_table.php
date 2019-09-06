@@ -6,11 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTransmittersTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('transmitters', function (Blueprint $table) {
@@ -24,14 +19,11 @@ class CreateTransmittersTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('interaction_id')->nullable();
             $table->foreign('interaction_id')->references('id')->on('interactions');
+            $table->unsignedBigInteger('mark_id')->nullable();
+            $table->foreign('mark_id')->references('id')->on('marks');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('transmitters');

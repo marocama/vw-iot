@@ -2,6 +2,23 @@
 
 @section('content')
 @include('includes.alerts')
+@foreach($alerts as $alert)
+<div class="alert bg-{{$alert->color}} text-white shadow mb-3 alert-dismissible fade show" role="alert">
+    <strong><i class="icon fa fa-fw fa-{{$alert->symbol}} mr-2"></i></strong>{{$alert->name}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+@endforeach
+@if (strtotime('now') > strtotime(Auth::user()->expiration))
+<div class="alert bg-danger text-white shadow mb-3 alert-dismissible fade show" role="alert">
+    <strong><i class="icon fa fa-fw fa-times mr-2"></i></strong>Seu plano de serviços expirou! Para continuar utilizando nossos serviços, entre em contato com o suporte.
+</div>
+@elseif (strtotime('+3 day') > strtotime(Auth::user()->expiration))
+<div class="alert bg-warning text-white shadow mb-3 alert-dismissible fade show" role="alert">
+    <strong><i class="icon fa fa-fw fa-times mr-2"></i></strong>Seu plano de serviços está prestes a expirar! Entre em contato com o suporte para evitar a suspensão de seus serviços.
+</div>
+@endif
 <div class="d-sm-flex align-items-center justify-content-between mb-4 d-none d-sm-block">
     <h1 class="h3 mb-0 text-gray-800">Painel</h1>
     <a href="#" class="btn btn-primary btn-icon-split">
@@ -11,7 +28,6 @@
         <span class="text">Área de Monitoramento</span>
     </a>
 </div>
-
 <div class="d-block d-sm-none">
     <a href="#" class="btn btn-primary btn-block">
         <span class="icon text-white-50">

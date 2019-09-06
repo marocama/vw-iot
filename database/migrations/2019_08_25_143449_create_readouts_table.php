@@ -6,11 +6,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateReadoutsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('readouts', function (Blueprint $table) {
@@ -22,11 +17,6 @@ class CreateReadoutsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('readouts');

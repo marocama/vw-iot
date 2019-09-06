@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class AlertController extends Controller
 {
+    // ***************************************
+    // ** Limpa contador de alertas do usuário
     public function clear()
     {
         auth()->user()->alerts()->update(['view' => true]);

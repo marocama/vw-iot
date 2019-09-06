@@ -32,7 +32,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -87,29 +87,37 @@ class RegisterController extends Controller
     {
         if (isset($data['operator']) && $data['operator'] == 'on')
         {
-            $master = User::where('user_token', '=', $data['operator_token'])->get();
-            Alert::create([
-                'name' => 'Novo Operador cadastrado.',
-                'period' => date('Y-m-d H:i:s', strtotime('now')),
-                'symbol' => 'user-plus',
-                'color' => 'success',
-                'view' => false,
-                'user_id' => $master[0]->id,
-            ]);
+            $master = User::where('user_token', $data['operator_token'])->first();
+            $alert = new Alert;
+
+            $alert->name    = 'Novo Operador cadastrado.';
+            $alert->public  = false;
+            $alert->period  = date('Y-m-d H:i:s', strtotime('now'));
+            $alert->symbol  = 'user-plus';
+            $alert->color   = 'success';
+            $alert->view    = false;
+            $alert->user_id = $master->id;
+
+            $alert->save();
         }
 
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone' => str_replace(['(', ')', '-', ' '], '', $data['phone']),
-            'document' => str_replace(['/', '-', '.'], '', $data['document']),
-            'cep' => str_replace('-', '', $data['cep']),
-            'birth' => date('Y-m-d', strtotime(str_replace('/', '-', $data['birth']))),
-            'expiration' => isset($data['operator']) && $data['operator'] == 'on' ? $master[0]->expiration : date('Y-m-d H:i:s', strtotime('+1 day')),
-            'password' => Hash::make($data['password']),
-            'user_type' => isset($data['operator']) && $data['operator'] == 'on' ? 'Operador' : 'Master',
-            'user_token' => Str::random(8),
-            'user_id' => isset($data['operator']) && $data['operator'] == 'on' ? $master[0]->id : null,
-        ]);
+        $user = new User;
+
+        $user->name         = $data['name'];
+        $user->email        = $data['email'];
+        $user->phone        = str_replace(['(', ')', '-', ' '], '', $data['phone']);
+        $user->document     = str_replace(['/', '-', '.'], '', $data['document']);
+        $user->cep          = str_replace('-', '', $data['cep']);    
+        $user->birth        = date('Y-m-d', strtotime(str_replace('/', '-', $data['birth'])));
+        $user->expiration   = isset($data['operator']) && $data['operator'] == 'on' ? $master->expiration : date('Y-m-d H:i:s', strtotime('+1 day'));
+        $user->password     = Hash::make($data['password']);
+        $user->user_type    = isset($data['operator']) && $data['operator'] == 'on' ? 'Operador' : 'Master';
+        $user->user_token   = Str::random(8);
+        $user->fileName     = isset($data['operator']) && $data['operator'] == 'on' ? $master->fileName : null;
+        $user->user_id      = isset($data['operator']) && $data['operator'] == 'on' ? $master->id : null;
+        
+        $user->save();
+
+        return $user;
     }
 }
